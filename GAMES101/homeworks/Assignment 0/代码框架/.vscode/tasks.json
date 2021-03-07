@@ -1,0 +1,48 @@
+{
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "g++.exe hard compile",
+            // windows powershell
+            "command": [
+                "C:/ProgramData/chocolatey/bin/g++.exe",
+                "-g",
+                "'${file}'",
+                "-o",
+                "'${fileDirname}/${fileBasenameNoExtension}.exe'",
+                "-I",
+                "'D:/GitHub/cg/GAMES-notes/GAMES101/homeworks'",
+            ],
+            "args": []
+        },
+        {
+            "type": "shell",
+            "label": "g++.exe soft compile",
+            // windows powershell
+            "command": [
+                "if (-not (Test-Path ./${fileBasenameNoExtension}.exe)) {",
+                "C:/ProgramData/chocolatey/bin/g++.exe",
+                "-g",
+                "'${file}'",
+                "-o",
+                "'${fileDirname}/${fileBasenameNoExtension}.exe'",
+                "-I",
+                "'D:/GitHub/cg/GAMES-notes/GAMES101/homeworks'",
+                "} else {echo '${fileBasenameNoExtension}.exe already exists.'}"
+            ],
+            "args": []
+        },
+        {
+            "type": "shell",
+            "label": "CPP: soft compile and run this file",
+            "command": [
+                "./${fileBasenameNoExtension}.exe"
+            ],
+            "args": [],
+            "dependsOn": [
+                "g++.exe soft compile"
+            ]
+        }
+    ],
+    "version": "2.0.0"
+}
